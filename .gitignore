@@ -1,0 +1,13 @@
+# Segredos: nunca vão para o GitHub
+.env
+.streamlit/secrets.toml
+
+# Lixo do Python e do sistema
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+
+# Arquivos de trabalho
+*_conteudo.json
+saida/

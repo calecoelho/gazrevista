@@ -1,0 +1,6 @@
+streamlit>=1.40
+lxml
+beautifulsoup4
+pillow
+pymupdf>=1.24.2
+openai>=1.0
