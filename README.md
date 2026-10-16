@@ -2,6 +2,12 @@
 
 App interno (Streamlit) para a equipe montar a Gazeta do Povo Revista.
 
+O app tem um menu lateral com três páginas:
+
+- **Montar a revista** (as duas abas descritas abaixo);
+- **Roteiro para redes:** sugere textos curtos para divulgar a edição, a partir das matérias que você escolher;
+- **Tutorial:** explica como fazer os uploads e o que o sistema devolve em cada etapa.
+
 **Aba 1 – Montar a revista:** sobe os HTMLs das matérias e baixa a revista em Word (`.docx`) e o texto para publicar no site (`texto_para_publicar.txt`).
 
 **Aba 2 – Finalizar o PDF:** sobe o PDF da revista já editada e o PDF da capa. O sistema junta os dois, coloca o banner na página vazia que vem logo depois do índice e comprime o arquivo (nível médio, por padrão).
@@ -16,7 +22,13 @@ Fluxo de quem usa:
 
 | Arquivo | Para que serve |
 |---|---|
-| `app.py` | A página do app (senha, as duas abas). |
+| `app.py` | A porta de entrada do app: pede a senha e monta o menu lateral. |
+| `comum.py` | A tela de senha e a leitura dos segredos, usadas por todas as páginas. |
+| `paginas/revista.py` | A página "Montar a revista" (abas de Word e de PDF). |
+| `paginas/roteiro.py` | A página "Roteiro para redes". |
+| `paginas/tutorial.py` | A página "Tutorial". |
+| `roteiro_redes.py` | O pedido à IA e a limpeza dos textos do roteiro. |
+| `exemplos/exemplos_roteiro.txt` | Os textos de exemplo que a IA imita no roteiro (veja abaixo como mudar). |
 | `montar_revista.py` | Lê os HTMLs e monta a revista em Word a partir do modelo. |
 | `gerar_texto_publicacao.py` | Gera o texto para publicar (com a abertura escrita pela IA). |
 | `finalizar_pdf.py` | Junta capa + revista, coloca o banner e comprime. |
@@ -98,6 +110,14 @@ Em `config.py`, `BANNER_MODO` escolhe como ele entra na página:
 - `"automatico"` (padrão): banner em PDF cobre a página inteira; banner em imagem cabe na área livre, sem cobrir o logo do topo nem o número da página.
 - `"area_livre"`: sempre cabe na área livre.
 - `"pagina_inteira"`: sempre cobre a página toda.
+
+## Roteiro para redes
+
+Na página **Roteiro para redes**, a pessoa escolhe a matéria de capa e, se quiser, até 4 outras para destacar. O sistema pede à OpenAI de 1 a 5 ideias de texto curto (cerca de 80 a 130 palavras, em 2 ou 3 parágrafos), cada uma com um gancho diferente, no estilo dos exemplos. Os textos usam só o que está nas matérias escolhidas, mas sempre vale ler antes de publicar.
+
+Se os HTMLs já foram enviados na página "Montar a revista", a página de roteiro os usa automaticamente.
+
+**Para mudar o estilo:** edite o arquivo `exemplos/exemplos_roteiro.txt`. Cada texto começa com uma linha `EXEMPLO 1:`, `EXEMPLO 2:` e assim por diante. Pode acrescentar, trocar ou apagar exemplos: a IA imita o tom e o tamanho deles. Depois é só enviar o arquivo ao GitHub.
 
 ## Links e marcadores
 
