@@ -1,0 +1,1 @@
+Coloque aqui o banner da revista: banner.pdf (uma página de PDF, com o link) ou banner.png. Ele entra na página vazia depois do índice.
